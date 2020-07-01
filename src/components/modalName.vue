@@ -4,7 +4,8 @@
       <div>
         <button
           @click="openModal()"
-          class="btn-rounded mx-1 bg-purple-600 hover:bg-purple-700 text-white  font-bold py-2 px-2">
+          class="btn-rounded mx-1 bg-purple-600 hover:bg-purple-700 text-white  font-bold py-2 px-2"
+        >
           <svg
             aria-hidden="true"
             focusable="false"
@@ -132,10 +133,29 @@ export default {
     return {
       modal: false,
       name: "",
+      nextNumlber: 0,
       selectName: "",
     };
   },
+  mounted() {
+    this.getLastData();
+  },
   methods: {
+     getLastData() {
+      const db = this.$firebase.firestore();
+        let query = db.collection("listName").orderBy("id", "desc");
+        query
+          .limit(1)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((documentSnapshot) => {
+              this.nextNumlber = documentSnapshot.data().id + 1;
+              // console.log(`Found document at ${documentSnapshot.ref.path}`);
+              // console.log(`Found document at ${documentSnapshot.data().id}`);
+            });
+          });
+        // console.log(res);
+    },
     closeModal() {
       this.name = "";
       this.selectName = "";
@@ -144,29 +164,30 @@ export default {
     openModal() {
       this.modal = true;
     },
-    validated(){
-      if (this.name != '' && this.selectName != '') {
+    validated() {
+      if (this.name != "" && this.selectName != "") {
         return true;
       }
-      return
+      return;
     },
-    async addName(){
+    async addName() {
       if (this.validated()) {
         const db = this.$firebase.firestore();
-      try {
-        await db.collection("listName").add({
+        try {
+          await db.collection("listName").add({
+            id:this.nextNumlber,
             name: this.name,
-            canton:this.selectName,
-        });
+            canton: this.selectName,
+          });
 
-        this.$emit('nameadd');
-        this.closeModal();
-      } catch (error) {
-        console.log(error);
+          this.$emit("nameadd");
+          this.closeModal();
+          this.getLastData();
+        } catch (error) {
+          console.log(error);
+        }
       }
-
-      }
-    }
+    },
   },
 };
 </script>
