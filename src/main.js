@@ -18,6 +18,9 @@ const config = {
   appId: "1:848342549212:web:091cd0b2a2109da9c92a19"
 };
 
+Array.prototype.unique=function(a){
+  return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0
+});
 /* Initialize firebase with your configuration */
 firebase.initializeApp(config);
 
