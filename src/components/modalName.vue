@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="h-10 mr-3 -mt-2 flex justify-end items-center">
+    <div class="h-10 m-5 right-0 bottom-0 absolute">
       <div>
         <button
           @click="openModal()"
