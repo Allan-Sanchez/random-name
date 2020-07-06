@@ -18,20 +18,20 @@
         <div
           v-if="item.canton == 1"
           class="bg-indigo-200 rounded-full h-10 flex justify-center items-center p-2 w-3/12">
-          <span class="block text-indigo-700 font-bold text-sm"
+          <span class="block text-indigo-700 font-bold text-xs  sm:text-sm p-3 sm:p-0"
             >Canton Calvario</span>
         </div>
 
         <div
           v-if="item.canton == 2"
           class="bg-red-200 rounded-full h-10 flex justify-center items-center p-2 w-3/12">
-          <span class="block text-red-700 font-bold text-sm">Canton Elena</span>
+          <span class="block text-red-700 font-bold text-xs  sm:text-sm p-3 sm:p-0">Canton Elena</span>
         </div>
 
         <div
           v-if="item.canton == 3"
           class="bg-purple-200 rounded-full h-10 flex justify-center items-center p-2 w-3/12">
-          <span class="block text-purple-700 font-bold text-sm"
+          <span class="block text-purple-700 font-bold text-xs  md:text-sm p-3 md:p-0"
             >Canton Barrios</span>
         </div>
       </div>
@@ -49,10 +49,14 @@ export default {
             canton:1,
             loading:false,
             openImage:true,
+            limitNumber: 0,
             checkedName:[],
             data:[],
             randomData:[]
         }
+    },
+    mounted() {
+      this.getLastData();
     },
    methods: {
      dataSize(item){
@@ -66,14 +70,14 @@ export default {
 
       do {
         
-        let tempSize = Math.floor(Math.random() * item);
+        let tempSize = Math.floor(Math.random() * this.limitNumber);
         tempRandom.push(tempSize);
         this.randomData = tempRandom.unique();
       
       } while (this.randomData.length < item);
   
 
-       const db = this.$firebase.firestore();
+       let db = this.$firebase.firestore();
 
        this.randomData.forEach(element => {
          let that =this;
@@ -92,7 +96,20 @@ export default {
           });
        });
 
-      }
+    },
+    getLastData() {
+      let db = this.$firebase.firestore();
+        let query = db.collection("listName").orderBy("id", "desc");
+        query
+          .limit(1)
+          .get()
+          .then((querySnapshot) => {
+            querySnapshot.forEach((documentSnapshot) => {
+              this.limitNumber = documentSnapshot.data().id;
+            });
+          });
+        // console.log(res);
+    },
    },
 }
 </script>
