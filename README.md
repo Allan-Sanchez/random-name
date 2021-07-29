@@ -1,5 +1,17 @@
-# list-random-name
+# List of random Names
 
+It generates a list of random names which should not be repeated, this data is consumed from a firebase API.
+
+The technologies used in this project are :
+```Tailwind CSS``` 
+```Vue.js``` 
+```Firebase``` 
+```JavaScript``` 
+
+It is worth mentioning that this application is a PWA 📱
+
+## Images of the Project
+ ![Project image ](https://res.cloudinary.com/dx9n8tsyu/image/upload/v1627510688/vue-proyect/random-name-vue_iuuu7c.png)
 ## Project setup
 ```
 npm install
@@ -10,15 +22,3 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
