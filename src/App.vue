@@ -12,11 +12,14 @@
         >Name deleted successful</span>
     </div>
 
-    <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-2 w-full md:h-screen">
+    <div class="grid sm:grid-cols-1 md:grid-cols-2 gap-2 w-full md:h-full min-h-screen">
       <div class="flex flex-col justify-center">
         <div class="text-gray-300 text-5xl w-full text-center">Random Name</div>
         <NUMBERNAME v-on:random-total="randomSize"></NUMBERNAME>
       </div>
+
+      <div class="flex justify-center items-center">
+        <!-- change div -->
       <div
         class="scroll-list card-border bg-gray-100 m-6 border relative">
         <h3 class="text-gray-900 text-5xl text-center my-5">Name List</h3>
@@ -24,6 +27,8 @@
         <LISTNAME ref="sizeChild"></LISTNAME>
 
         <MODALNAME v-on:nameadd="Nameadded()"></MODALNAME>
+      </div>
+
       </div>
     </div>
   </div>
