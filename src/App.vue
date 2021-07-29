@@ -21,7 +21,7 @@
       <div class="flex justify-center items-center">
         <!-- change div -->
       <div
-        class="scroll-list card-border bg-gray-100 m-6 border relative">
+        class="scroll-list card-border bg-gray-100 m-6 border relative w-full">
         <h3 class="text-gray-900 text-5xl text-center my-5">Name List</h3>
 
         <LISTNAME ref="sizeChild"></LISTNAME>
